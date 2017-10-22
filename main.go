@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bot/hanlder"
+	"bot/pkg/webhook"
 	"errors"
 	"flag"
 	"fmt"
@@ -10,12 +10,12 @@ import (
 
 var (
 	// Error message define
-	errRequired = errors.New("[ERROR] Missing required tokens")
+	errRequired = errors.New("[ERROR] Missing required opts")
 
 	// GitHub and GitLab opts
 	githubToken    = flag.String("github-token", "", "GitHub access token.")
 	gitlabToken    = flag.String("gitlab-token", "", "GitLab access token.")
-	gitlabEndpoint = flag.String("gitlab-endpoint", "https://gitlab.com/api/v4", "GitLab API Endpoint.")
+	gitlabEndpoint = flag.String("gitlab-endpoint", "https://gitlab.com", "GitLab API Endpoint.")
 
 	// Webhook server opts
 	webhookPort   = flag.Int("port", 8080, "Webhook server port.")
@@ -48,10 +48,10 @@ func main() {
 	}
 
 	// Init GitHub and GitLab account
-	c := hanlder.NewAccount(*githubToken, *gitlabToken, *gitlabEndpoint)
+	c := webhook.NewAccount(*githubToken, *gitlabToken, *gitlabEndpoint)
 	c.InitAccount()
 
 	// Start webhook server
-	s := hanlder.NewServer(*webhookPort, *webhookSecret, *webhookPath)
+	s := webhook.NewServer(*webhookPort, *webhookSecret, *webhookPath)
 	s.RunServer()
 }
