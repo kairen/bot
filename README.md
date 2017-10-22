@@ -1,4 +1,4 @@
-[![Docker Build Statu](https://img.shields.io/docker/build/kairen/bot.svg)](https://hub.docker.com/r/kairen/bot/) [![Build Status](https://travis-ci.org/kairen/bot.svg?branch=master)](https://travis-ci.org/kairen/bot) [![Coverage Status](https://coveralls.io/repos/github/kairen/bot/badge.svg?branch=master)](https://coveralls.io/github/kairen/bot?branch=master)
+[![Docker Build Statu](https://img.shields.io/docker/build/kairen/github-bot.svg)](https://hub.docker.com/r/kairen/github-bot/) [![Build Status](https://travis-ci.org/kairen/github-bot.svg?branch=master)](https://travis-ci.org/kairen/github-bot) [![Coverage Status](https://coveralls.io/repos/github/kairen/github-bot/badge.svg?branch=master)](https://coveralls.io/github/kairen/github-bot?branch=master)
 # Webhook handler for KaiRen's Bot
 Make GitLab CI work with a GitHub repository written in Go. The bot watch webhook event to handle something.
 
