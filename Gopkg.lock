@@ -5,7 +5,7 @@
   branch = "master"
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  revision = "130e6b02ab059e7b717a096f397c5b60111cae74"
+  revision = "1643683e1b54a9e88ad26d98f81400c8c9d9f4f9"
 
 [[projects]]
   branch = "master"
@@ -29,7 +29,7 @@
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context","context/ctxhttp"]
-  revision = "1087133bc4af3073e18add999345c6ae75918503"
+  revision = "cd69bc3fc700721b709c3a59e16e24c67b58f6ff"
 
 [[projects]]
   branch = "master"
@@ -47,7 +47,7 @@
   branch = "multiple-webhook"
   name = "gopkg.in/go-playground/webhooks.v3"
   packages = [".","github","gitlab"]
-  revision = "6f3c918ecdfa40039cc4e7bf0d78781815935059"
+  revision = "ae2d35ff46494e4a281a3a1eeebfbbe245193051"
   source = "github.com/kairen/webhooks"
 
 [solve-meta]

@@ -39,10 +39,32 @@ func (inf *GitHubInfo) InitGitHubClient() *github.Client {
 	return hc
 }
 
-// GitHubPRComment a message
-func GitHubPRComment(owner string, repo string, number int, body string) {
+// CreateGitHubPRComment create a pull reauest comment message
+func CreateGitHubPRComment(owner string, repo string, number int, body string) {
 	issue := &github.IssueComment{Body: &body}
 	_, _, err := hc.Issues.CreateComment(context.Background(), owner, repo, number, issue)
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+// GitHubStatus a status data
+type GitHubStatus struct {
+	State       string
+	TargetURL   string
+	Context     string
+	Description string
+}
+
+// CreateGitHubStatus create a status
+func CreateGitHubStatus(owner string, repo string, sha string, stat *GitHubStatus) {
+	status := &github.RepoStatus{
+		State:       github.String(stat.State),
+		TargetURL:   github.String(stat.TargetURL),
+		Context:     github.String(stat.Context),
+		Description: github.String(stat.Description),
+	}
+	_, _, err := hc.Repositories.CreateStatus(context.Background(), owner, repo, sha, status)
 	if err != nil {
 		log.Fatal(err)
 	}

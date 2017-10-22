@@ -27,7 +27,7 @@ func NewGitLab(token string, ep string) *GitLabInfo {
 func (inf *GitLabInfo) InitGitLabClient() *gitlab.Client {
 	lo.Do(func() {
 		lc = gitlab.NewClient(nil, inf.token)
-		lc.SetBaseURL(inf.endpoint)
+		lc.SetBaseURL(inf.endpoint + "/api/v4")
 		if lc == nil {
 			log.Fatal("GitLab client init  falied...")
 		}
@@ -35,8 +35,8 @@ func (inf *GitLabInfo) InitGitLabClient() *gitlab.Client {
 	return lc
 }
 
-// GitLabPRComment comment a message
-func GitLabPRComment(owner string, repo string, number int, body string) {
+// CreateGitLabPRComment comment a message
+func CreateGitLabPRComment(owner string, repo string, number int, body string) {
 	opts := &gitlab.CreateMergeRequestNoteOptions{
 		Body: gitlab.String(body),
 	}
