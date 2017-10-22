@@ -1,8 +1,8 @@
 package webhook
 
 import (
-	"bot/pkg/api"
-	"bot/pkg/utils"
+	"github-bot/pkg/api"
+	"github-bot/pkg/utils"
 	"log"
 	"strings"
 

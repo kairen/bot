@@ -1,7 +1,7 @@
 package webhook
 
 import (
-	"bot/pkg/api"
+	"github-bot/pkg/api"
 	"log"
 	"strconv"
 

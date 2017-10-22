@@ -1,10 +1,10 @@
 package main
 
 import (
-	"bot/pkg/webhook"
 	"errors"
 	"flag"
 	"fmt"
+	"github-bot/pkg/webhook"
 	"os"
 )
 
@@ -24,8 +24,8 @@ var (
 )
 
 func usage() {
-	fmt.Fprintf(os.Stderr, "Usage: bot [OPTION]...\n")
-	fmt.Fprintf(os.Stderr, "bot watch your GitHub and GitLab event to handle anything!!\n\n")
+	fmt.Fprintf(os.Stderr, "Usage: github-bot [OPTION]...\n")
+	fmt.Fprintf(os.Stderr, "github-bot watch your GitHub and GitLab event to handle anything!!\n\n")
 	fmt.Fprintf(os.Stderr, "Options:\n")
 	flag.PrintDefaults()
 	fmt.Fprintln(os.Stderr)

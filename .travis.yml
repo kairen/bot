@@ -4,11 +4,11 @@ go:
 install: true
 before_install:
   - "cd"
-  - "mv $HOME/gopath/src/github.com/kairen/bot $HOME/gopath/src/bot"
-  - "export TRAVIS_BUILD_DIR=$HOME/gopath/src/bot"
-  - "cd $HOME/gopath/src/bot"
+  - "mv $HOME/gopath/src/github.com/kairen/github-bot $HOME/gopath/src/github-bot"
+  - "export TRAVIS_BUILD_DIR=$HOME/gopath/src/github-bot"
+  - "cd $HOME/gopath/src/github-bot"
   - go get -u github.com/golang/dep/cmd/dep
-  - go get github.com/mattn/goveralls
+  - go get -u github.com/mattn/goveralls
   - go get -u github.com/alecthomas/gometalinter
   - gometalinter --install
   - dep ensure
