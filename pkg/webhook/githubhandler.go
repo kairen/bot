@@ -2,6 +2,7 @@ package webhook
 
 import (
 	"bot/pkg/api"
+	"bot/pkg/utils"
 	"log"
 	"strings"
 
@@ -17,11 +18,11 @@ func GitHubIssueCommentHandler(payload interface{}, header webhooks.Header) {
 		case "/ok-to-test":
 			owner := isOwner(&pl)
 			if owner {
-				// path := "/tmp/" + pl.Repository.Name
-				// remoteURL := account.gitlabEndpoint + "/" + pl.Repository.FullName
-				// utils.GitClone(pl.Repository.CloneURL, path)
-				// utils.GitAddRemote(path, "gitlab", remoteURL)
-				// utils.GitFetchLastUpdate(path, "origin")
+				path := "/tmp/" + pl.Repository.Name
+				remoteURL := account.gitlabEndpoint + "/" + pl.Repository.FullName
+				utils.GitClone(pl.Repository.CloneURL, path)
+				utils.GitAddRemote(path, "gitlab", remoteURL)
+				utils.GitFetchLastUpdate(path, "origin")
 			}
 		default:
 			log.Print("Other Event trigger")
