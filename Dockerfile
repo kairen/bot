@@ -3,17 +3,15 @@ FROM golang:1.8-alpine AS build-env
 
 ENV GOPATH "/go"
 
-ADD . /go/src/bot
-RUN apk add --no-cache git && \
-  go get -u github.com/golang/dep/cmd/dep
-RUN cd /go/src/bot && \
-  dep ensure && \
-  go build -o bot
+ADD . /go/src/github-bot
+RUN cd /go/src/github-bot && \
+  go build -o github-bot
 
 # Run stage
 FROM alpine
 MAINTAINER Kyle Bai(kyle.b@inwinstack.com)
 
-COPY --from=build-env /go/src/bot/bot /bin/bot
+COPY --from=build-env /go/src/github-bot/github-bot /bin/github-bot
+RUN apk add --no-cache git openssh
 
-ENTRYPOINT ["/bin/bot"]
+ENTRYPOINT ["/bin/github-bot"]

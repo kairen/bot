@@ -10,7 +10,3 @@
 [[constraint]]
   branch = "master"
   name = "github.com/google/go-github"
-
-[[constraint]]
-  branch = "v4"
-  name = "gopkg.in/src-d/go-git.v4"

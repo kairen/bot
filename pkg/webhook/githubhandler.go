@@ -2,6 +2,7 @@ package webhook
 
 import (
 	"github-bot/pkg/api"
+	"github-bot/pkg/config"
 	"github-bot/pkg/utils"
 	"log"
 	"strings"
@@ -19,10 +20,11 @@ func GitHubIssueCommentHandler(payload interface{}, header webhooks.Header) {
 			owner := isOwner(&pl)
 			if owner {
 				path := "/tmp/" + pl.Repository.Name
-				remoteURL := account.gitlabEndpoint + "/" + pl.Repository.FullName
+				remoteURL := "git@gitlab.com:" + pl.Repository.FullName + ".git"
 				utils.GitClone(pl.Repository.CloneURL, path)
 				utils.GitAddRemote(path, "gitlab", remoteURL)
-				utils.GitFetchLastUpdate(path, "origin")
+				utils.GitFetch(path, "origin", 2)
+				utils.GitPushAndDelete(path, "gitlab", 2)
 			}
 		default:
 			log.Print("Other Event trigger")
@@ -32,10 +34,13 @@ func GitHubIssueCommentHandler(payload interface{}, header webhooks.Header) {
 
 // GitHubPullRequestHandler handles github pull request events
 func GitHubPullRequestHandler(payload interface{}, header webhooks.Header) {
-	// pl := payload.(github.PullRequestPayload)
-	// pl.PullRequest.Commits
-	// urls := strings.Split(pl.PullRequest.StatusesURL, "/")
-	// repo := pl.Repository
+	pl := payload.(github.PullRequestPayload)
+	conf := config.LoadJobJSON().NewProject(pl.Repository.Name)
+	project := conf.GetProject(pl.Repository.Name)
+	project.AddJob(pl.PullRequest.Number)
+	job := project.GetJob(pl.PullRequest.Number)
+	job.HeadSha = pl.PullRequest.Head.Sha
+	config.SaveJobAsJSON(conf)
 }
 
 // Check sender is owner
