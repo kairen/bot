@@ -56,9 +56,9 @@ func (p *Project) AddJob(id int64) {
 }
 
 // RemoveJob remote a old job
-func (p *Project) RemoveJob(j Job) bool {
+func (p *Project) RemoveJob(id int64) bool {
 	for i := range p.Jobs {
-		if p.Jobs[i].ID == j.ID {
+		if p.Jobs[i].ID == id {
 			p.Jobs = p.Jobs[:i+copy(p.Jobs[i:], p.Jobs[i+1:])]
 			return true
 		}
