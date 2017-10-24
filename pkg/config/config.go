@@ -24,7 +24,8 @@ type Project struct {
 type ProjectList []Project
 
 const (
-	jobPath = "./jobs.json"
+	jobPath    = "/var/lib/github-bot/jobs.json"
+	jobPathKey = "JOB_FILEPATH"
 	// StateDefault is state default value
 	StateDefault = "created"
 )
@@ -105,7 +106,11 @@ func LoadJobJSON() ProjectList {
 
 // SaveJobAsJSON save state to json file
 func SaveJobAsJSON(v interface{}) {
-	fo, err := os.Create(jobPath)
+	path := os.Getenv(jobPathKey)
+	if path == "" {
+		path = jobPath
+	}
+	fo, err := os.Create(path)
 	if err != nil {
 		log.Fatal(err)
 	}
