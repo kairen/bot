@@ -12,6 +12,7 @@ FROM alpine
 MAINTAINER Kyle Bai(kyle.b@inwinstack.com)
 
 COPY --from=build-env /go/src/github-bot/github-bot /bin/github-bot
+COPY ./etc/github-bot /etc/github-bot
 RUN apk add --no-cache git openssh && \
   mkdir /var/lib/github-bot
 

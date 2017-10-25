@@ -25,7 +25,7 @@ type ProjectList []Project
 
 const (
 	jobPath    = "/var/lib/github-bot/jobs.json"
-	jobPathKey = "JOB_FILEPATH"
+	jobPathKey = "JOB_FILE_PATH"
 	// StateDefault is state default value
 	StateDefault = "created"
 )
@@ -91,9 +91,16 @@ func (pl ProjectList) GetProject(name string) *Project {
 	return nil
 }
 
+func jobFilePath() string {
+	if path := os.Getenv(jobPathKey); path != "" {
+		return path
+	}
+	return jobPath
+}
+
 // LoadJobJSON list a json data
 func LoadJobJSON() ProjectList {
-	raw, err := ioutil.ReadFile(jobPath)
+	raw, err := ioutil.ReadFile(jobFilePath())
 	if err != nil {
 		log.Printf("Info: %v", err)
 		raw = []byte(`[]`)
@@ -106,11 +113,7 @@ func LoadJobJSON() ProjectList {
 
 // SaveJobAsJSON save state to json file
 func SaveJobAsJSON(v interface{}) {
-	path := os.Getenv(jobPathKey)
-	if path == "" {
-		path = jobPath
-	}
-	fo, err := os.Create(path)
+	fo, err := os.Create(jobFilePath())
 	if err != nil {
 		log.Fatal(err)
 	}

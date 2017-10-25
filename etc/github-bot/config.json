@@ -1,0 +1,10 @@
+[
+  {
+    "name": "kube-ansible",
+    "origin": "https://github.com/kairen/kube-ansible.git",
+    "origin_name": "origin",
+    "remote": "ssh://git@git.nutc-imac.com:10022/kairen/kube-ansible.git",
+    "remote_name": "gitlab",
+    "repos_path": "/var/lib/github-bot/kube-ansible"
+  }
+]

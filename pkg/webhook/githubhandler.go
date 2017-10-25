@@ -19,12 +19,11 @@ func GitHubIssueCommentHandler(payload interface{}, header webhooks.Header) {
 		case "/ok-to-test":
 			owner := isOwner(&pl)
 			if owner {
-				path := "/tmp/" + pl.Repository.Name
-				remoteURL := "git@gitlab.com:" + pl.Repository.FullName + ".git"
-				utils.GitClone(pl.Repository.CloneURL, path)
-				utils.GitAddRemote(path, "gitlab", remoteURL)
-				utils.GitFetch(path, "origin", pl.Issue.Number)
-				utils.GitPushAndDelete(path, "gitlab", pl.Issue.Number)
+				repo := config.GetRepository(pl.Repository.Name)
+				utils.GitClone(repo.Path, pl.Repository.CloneURL)
+				utils.GitAddRemote(repo.Path, repo.RemoteName, repo.Remote)
+				utils.GitFetch(repo.Path, repo.OriginName, pl.Issue.Number)
+				utils.GitPushAndDelete(repo.Path, repo.RemoteName, pl.Issue.Number)
 			}
 		default:
 			log.Print("Other Event trigger")

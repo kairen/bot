@@ -25,7 +25,7 @@ func GitLabPipelineHandler(payload interface{}, header webhooks.Header) {
 		State:       state,
 		Context:     "gitlab-ci/pipeline",
 		Description: "Pipeline " + state,
-		TargetURL:   pl.Project.WebURL,
+		TargetURL:   pl.Project.WebURL + "/pipelines",
 	}
 	stat.CheckStatus()
 	config.SaveJobAsJSON(conf)

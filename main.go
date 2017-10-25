@@ -4,6 +4,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"github-bot/pkg/config"
 	"github-bot/pkg/webhook"
 	"os"
 )
@@ -46,6 +47,8 @@ func main() {
 		usage()
 		fail(errRequired)
 	}
+
+	config.LoadRepositoryConfig()
 
 	// Init GitHub and GitLab account
 	c := webhook.NewAccount(*githubToken, *gitlabToken, *gitlabEndpoint)

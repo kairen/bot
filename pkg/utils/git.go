@@ -34,7 +34,7 @@ func splitArgs(argstr string) []string {
 }
 
 // GitClone clone project from url
-func GitClone(url, path string) {
+func GitClone(path, url string) {
 	log.Println("Git remote clone")
 	_, err := os.Stat(path)
 	if os.IsNotExist(err) {
